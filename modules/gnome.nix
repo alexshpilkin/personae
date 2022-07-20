@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ graphical, pkgs, ... }:
 
 {
+	imports = [ graphical ];
+
 	home.packages = with pkgs; with gnomeExtensions; [
 		deja-dup gparted pika-backup # administration
 		evolution fractal gnome.polari transmission-gtk # communication

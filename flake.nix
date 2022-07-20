@@ -3,8 +3,10 @@
 {
 	inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 	inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree";
+	inputs.nixpkgs-unfree.inputs.nixpkgs.follows = "nixpkgs";
 
-	outputs = { self, home-manager, nixpkgs }:
+	outputs = { self, home-manager, nixpkgs, nixpkgs-unfree }:
 		let
 			inherit (builtins) elemAt match pathExists readDir;
 			inherit (home-manager.lib) homeManagerConfiguration;
@@ -27,12 +29,13 @@
 
 			mkUser = name: path:
 				let
+					pkgs-unfree = nixpkgs-unfree.legacyPackages.x86_64-linux; # FIXME
 					username = elemAt (match "([^@]*)(@.*)?" name) 0;
 					userPath = elemAt (match "([^@]*)@.*" (toString path)) 0;
 					userFile = userPath + ".nix";
 				in homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME
-					extraSpecialArgs = self.homeModules;
+					extraSpecialArgs = self.homeModules // { inherit pkgs-unfree; };
 					modules = [
 						{
 							# FIXME system.configurationRevision counterpart?
