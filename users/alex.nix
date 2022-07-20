@@ -83,8 +83,11 @@ in {
 	};
 
 	home.packages = with pkgs; [
-		binwalk dos2unix file ffmpeg imagemagick jq libarchive pdftk pup unrar-wrapper zip # formats
+		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
+		tealdeer cht-sh # documentation
+		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
+		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget # scripting
 		fd nix-index ripgrep ripgrep-all # search
-		editorconfig-core-c # text
+		colordiff editorconfig-core-c wdiff # text
 	];
 }
