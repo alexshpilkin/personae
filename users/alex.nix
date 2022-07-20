@@ -79,12 +79,54 @@ in {
 		extraConfig = ''
 			define-command write-delete-buffer %{ write; delete-buffer }
 			alias global wdb write-delete-buffer
+
+			define-command tig %{ terminal tig --all }
 		'';
+	};
+
+	programs.git = {
+		enable = true;
+		package = pkgs.gitFull;
+		lfs.enable = true;
+
+		userName = "Alexander Shpilkin";
+		userEmail = "ashpilkin@gmail.com";
+
+		aliases = {
+			abt = "rebase --abort";
+			con = "rebase --continue";
+			an = "add --intent-to-add";
+			ap = "add --patch";
+			com = "commit --no-gpg-sign";
+			l = "log --pretty=l";
+			pre = "preview";
+			preview = "diff --staged";
+			reb = "rebranch --no-gpg-sign";
+			rebranch = "reset --interactive --reset-author-date";
+			"rec" = "recommit --no-gpg-sign";
+			recommit = "commit --amend --reset-author";
+			rew = "rewrite --no-gpg-sign";
+			rewrite = "rebase --interactive --committer-date-is-author-date";
+		};
+
+		# more merge conflicts but better markers
+		extraConfig.merge.conflictStyle = "diff3";
+
+		# like "oneline" but with PGP status
+		extraConfig.pretty.l = "%C(auto)%h %Cblue%G?%Creset%C(auto)%d %s";
+
+		# triangular workflow setup
+		extraConfig.remote.pushDefault = "origin";
+		extraConfig.push.default = "current";
+
+		# nags
+		extraConfig.advice.detachedHead = false;
+		extraConfig.init.defaultBranch = "master";
 	};
 
 	home.packages = with pkgs; [
 		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
-		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 # development
+		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
 		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget # scripting
