@@ -84,6 +84,7 @@ in {
 
 	home.packages = with pkgs; [
 		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
+		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
 		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget # scripting
