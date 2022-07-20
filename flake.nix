@@ -9,7 +9,7 @@
 			inherit (builtins) elemAt match pathExists readDir;
 			inherit (home-manager.lib) homeManagerConfiguration;
 			inherit (nixpkgs.lib)
-				filterAttrs genAttrs hasSuffix mapAttrs mapAttrs' nameValuePair
+				filterAttrs genAttrs hasSuffix mapAttrs mapAttrs' nameValuePair optional
 				removeSuffix;
 
 			# FIXME copied from machines
@@ -24,20 +24,24 @@
 				in mapAttrs' toPair (filterAttrs isNix (readDir dir));
 
 			mkUser = name: path:
-				homeManagerConfiguration {
+				let
+					username = elemAt (match "([^@]*)(@.*)?" name) 0;
+					userPath = elemAt (match "([^@]*)@.*" (toString path)) 0;
+					userFile = userPath + ".nix";
+				in homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME
 					modules = [
 						{
 							# FIXME system.configurationRevision counterpart?
-							home = rec {
-								username = elemAt (match "([^@]*)(@.*)?" name) 0;
+							home = {
+								inherit username;
 								homeDirectory = "/home/${username}";
 							};
 							programs.home-manager.enable = true;
 						}
 						path
-						# FIXME user@host -> user ?
-					];
+					] ++ optional (username != name && pathExists userPath) userPath
+					  ++ optional (username != name && pathExists userFile) userFile;
 				};
 
 		in {
