@@ -24,8 +24,24 @@ in {
 		PS4=$color'+ '$reset
 	'';
 
+	programs.tmux = {
+		enable = true;
+		baseIndex = 1; # number windows and panes from 1
+		escapeTime = 10; # delay for ECMA codes vs ESC key
+		newSession = true; # create session on attach
+		extraConfig = ''
+			set-option -g mouse on
+			# FIXME set-option -s copy-command wl-copy
+		'';
+	};
+
+	programs.fzf = {
+		enable = true;
+		tmux.enableShellIntegration = true;
+	};
+
 	home.packages = with pkgs; [
 		binwalk dos2unix file ffmpeg imagemagick jq libarchive pdftk pup unrar-wrapper zip # formats
-		fd fzf nix-index ripgrep ripgrep-all # search
+		fd nix-index ripgrep ripgrep-all # search
 	];
 }
