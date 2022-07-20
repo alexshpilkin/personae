@@ -42,5 +42,11 @@
 
 		in {
 			homeConfigurations = mapAttrs mkUser (nixPaths ./users);
+			devShells = mapAttrs (system: hmpkgs: {
+				default = import ./shell.nix {
+					inherit (nixpkgs.legacyPackages.${system}) pkgs;
+					inherit (hmpkgs) home-manager;
+				};
+			}) home-manager.packages;
 		};
 }
