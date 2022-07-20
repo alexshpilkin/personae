@@ -24,6 +24,8 @@ in {
 		PS4=$color'+ '$reset
 	'';
 
+	programs.direnv.enable = true;
+
 	programs.tmux = {
 		enable = true;
 		baseIndex = 1; # number windows and panes from 1
