@@ -124,6 +124,8 @@ in {
 		extraConfig.init.defaultBranch = "master";
 	};
 
+	services.syncthing.enable = true;
+
 	home.packages = with pkgs; [
 		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
 		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 tig # development
