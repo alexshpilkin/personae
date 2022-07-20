@@ -23,6 +23,8 @@
 						nameValuePair (removeSuffix ".nix" entry) (dir + "/${entry}");
 				in mapAttrs' toPair (filterAttrs isNix (readDir dir));
 
+			mkModule = name: path: { imports = [ path ]; };
+
 			mkUser = name: path:
 				let
 					username = elemAt (match "([^@]*)(@.*)?" name) 0;
@@ -30,6 +32,7 @@
 					userFile = userPath + ".nix";
 				in homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME
+					extraSpecialArgs = self.homeModules;
 					modules = [
 						{
 							# FIXME system.configurationRevision counterpart?
@@ -45,6 +48,7 @@
 				};
 
 		in {
+			homeModules = mapAttrs mkModule (nixPaths ./modules);
 			homeConfigurations = mapAttrs mkUser (nixPaths ./users);
 			devShells = mapAttrs (system: hmpkgs: {
 				default = import ./shell.nix {
