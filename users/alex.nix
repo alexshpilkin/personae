@@ -40,8 +40,49 @@ in {
 		tmux.enableShellIntegration = true;
 	};
 
+	home.sessionVariables.EDITOR = "kak";
+	programs.kakoune = {
+		enable = true;
+		config.indentWidth = 0; # tabs FTW
+		config.showMatching = true; # highlight matching delimiter
+		config.ui.assistant = "none"; # disable clippy
+		config.ui.setTitle = true; # update terminal title
+		config.hooks = [
+			{
+				name = "BufNewFile"; option = ".*";
+				commands = "editorconfig-load";
+			}
+			{
+				name = "BufOpenFile"; option = ".*";
+				commands = "editorconfig-load";
+			}
+			# open windows rather than panes
+			#{
+			#	name = "ModuleLoaded"; option = "tmux";
+			#	commands = "alias global terminal tmux-terminal-window";
+			#}
+			#{
+			#	name = "ModuleLoaded"; option = "tmux-repl";
+			#	commands = "alias global repl-new tmux-repl-window";
+			#}
+			{
+				name = "WinSetOption"; option = "filetype=nix";
+				commands = "set-option window tabstop 2";
+			}
+		];
+		config.keyMappings = [
+			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
+		];
+		plugins = with pkgs.kakounePlugins; [ fzf-kak kakoune-rainbow ];
+		extraConfig = ''
+			define-command write-delete-buffer %{ write; delete-buffer }
+			alias global wdb write-delete-buffer
+		'';
+	};
+
 	home.packages = with pkgs; [
 		binwalk dos2unix file ffmpeg imagemagick jq libarchive pdftk pup unrar-wrapper zip # formats
 		fd nix-index ripgrep ripgrep-all # search
+		editorconfig-core-c # text
 	];
 }
