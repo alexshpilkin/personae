@@ -3,6 +3,7 @@
 let
 	inherit (builtins) replaceStrings;
 	inherit (lib) mkDefault;
+	rootConfig = config;
 
 in {
 	home.extraOutputsToInstall = mkDefault [ "doc" "man" "info" ];
@@ -164,6 +165,58 @@ in {
 
 	services.gpg-agent.enable = true;
 	services.gpg-agent.enableSshSupport = true;
+
+	programs.lieer = {
+		enable = true;
+		# local_trash_tag support is post 1.3
+		package = pkgs.lieer.overrideAttrs (old: {
+			src = pkgs.fetchFromGitHub {
+				owner = "gauteh";
+				repo = "lieer";
+				rev = "11c792fbf416aedb0466f64973e29e1f4aed4916"; # master 2022-06-29
+				sha256 = "0fw9vjcr2l9qkiilzibq0h88jfmlpgm6zzra9klpkyg8l3n3mcgw";
+			};
+		});
+	};
+	programs.notmuch = {
+		enable = true;
+		new.tags = [ "new" ];
+		hooks.preNew = ''
+			${config.programs.lieer.package}/bin/gmi sync \
+				-C ${config.accounts.email.accounts.gmail.maildir.absPath}
+		'';
+	};
+	programs.alot = {
+		enable = true;
+		settings.theme = "tomorrow";
+	};
+
+	accounts.email.maildirBasePath = "Mail";
+	accounts.email.accounts.gmail = { config, ... }: {
+		primary = true;
+
+		userName = "ashpilkin@gmail.com";
+		address = "ashpilkin@gmail.com";
+		aliases = [ "alex.shpilkin@gmail.com" "alex@sheaf.site" ];
+		flavor = "gmail.com";
+
+		realName = "Alexander Shpilkin";
+		gpg = {
+			key = rootConfig.programs.gpg.settings.default-key;
+			signByDefault = true;
+		};
+
+		maildir.path = ".";
+		lieer = {
+			enable = true;
+			settings.ignore_tags = [ "new" ];
+			settings.local_trash_tag = "deleted";
+		};
+		notmuch.enable = true;
+		alot.sendMailCommand =
+			"${rootConfig.programs.lieer.package}/bin/gmi send -t " +
+			"-C ${config.maildir.absPath}";
+	};
 
 	services.syncthing.enable = true;
 
