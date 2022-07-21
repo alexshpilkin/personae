@@ -57,6 +57,7 @@ in {
 		config.indentWidth = 0; # tabs FTW
 		config.showMatching = true; # highlight matching delimiter
 		config.ui.assistant = "none"; # disable clippy
+		config.ui.enableMouse = true; # (home-manager overrides the default here)
 		config.ui.setTitle = true; # update terminal title
 		config.hooks = [
 			{
