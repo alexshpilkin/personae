@@ -1,9 +1,15 @@
-{ graphical, pkgs, ... }:
+{ config, graphical, pkgs, ... }:
 
 {
 	imports = [ graphical ];
 
+	systemd.user.sessionVariables = config.home.sessionVariables; # FIXME is this correct?
+
 	programs.bash.enableVteIntegration = true;
+
+	services.gnome-keyring.enable = true;
+
+	services.gpg-agent.pinentryFlavor = "gnome3";
 
 	home.packages = with pkgs; with gnomeExtensions; [
 		deja-dup gparted pika-backup # administration

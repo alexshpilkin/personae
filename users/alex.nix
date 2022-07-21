@@ -1,6 +1,7 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+	inherit (builtins) replaceStrings;
 	inherit (lib) mkDefault;
 
 in {
@@ -23,6 +24,13 @@ in {
 		PS3=$color''$reset
 		PS4=$color'+ '$reset
 	'';
+
+	systemd.user.sessionVariables.SSH_AUTH_SOCK =
+		let
+			unit = config.systemd.user.sockets.gpg-agent-ssh;
+			socket = unit.Socket.ListenStream;
+			expand = replaceStrings [ "%t" ] [ "\${XDG_RUNTIME_DIR}" ];
+		in "\${SSH_AUTH_SOCK:-${expand socket}}";
 
 	programs.direnv.enable = true;
 
@@ -124,10 +132,44 @@ in {
 		extraConfig.init.defaultBranch = "master";
 	};
 
+	services.gnome-keyring.components = [ "secrets" ];
+
+	programs.gpg.enable = true;
+	programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
+	programs.gpg.settings = rec {
+		default-key = "73E9AA114B3A894B";
+
+		cert-digest-algo = "SHA512";
+		personal-cipher-preferences = "AES256 AES192 AES";
+		personal-digest-preferences = "SHA512 SHA384 SHA256 SHA224";
+		personal-compress-preferences = "BZIP2 ZLIB ZIP Uncompressed";
+		default-preference-list =
+			personal-digest-preferences + " " +
+			personal-cipher-preferences + " " +
+			personal-compress-preferences;
+
+		disable-cipher-algo = [ "3DES" "BLOWFISH" "CAMELLIA128" "CAMELLIA192" "CAMELLIA256" "CAST5" "IDEA" "TWOFISH" ];
+		weak-digest = [ "RIPEMD160" "SHA1" ];
+		disable-pubkey-algo = [ "ELG" "DSA" ];
+		require-cross-certification = true; # future default
+
+		auto-key-retrieve = true;
+		keyserver = "hkp://keys.gnupg.net";
+		#keyserver = "ldap://keyserver.pgp.com";
+		#keyserver = "hkp://pgp.mit.edu";
+
+		charset = "utf-8"; # future default
+		greeting = false;
+	};
+
+	services.gpg-agent.enable = true;
+	services.gpg-agent.enableSshSupport = true;
+
 	services.syncthing.enable = true;
 
 	home.packages = with pkgs; [
 		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
+		yubikey-manager # communication
 		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
