@@ -173,7 +173,7 @@ in {
 		bench breezy cvs cvsps fossil git-annex git-annex-utils hyperfine mercurial radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
-		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget # scripting
+		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget youtube-dl # scripting
 		fd nix-index ripgrep ripgrep-all # search
 		colordiff editorconfig-core-c wdiff # text
 	];
