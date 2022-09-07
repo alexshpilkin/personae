@@ -78,6 +78,10 @@ in {
 			#	commands = "alias global repl-new tmux-repl-window";
 			#}
 			{
+				name = "WinSetOption"; option = "filetype=latex";
+				commands = "addhl window/ wrap";
+			}
+			{
 				name = "WinSetOption"; option = "filetype=nix";
 				commands = "set-option window tabstop 2";
 			}
