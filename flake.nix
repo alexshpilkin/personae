@@ -3,7 +3,7 @@
 {
 	inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 	inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree";
+	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
 	inputs.nixpkgs-unfree.inputs.nixpkgs.follows = "nixpkgs";
 
 	outputs = { self, home-manager, nixpkgs, nixpkgs-unfree }:
