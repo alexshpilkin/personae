@@ -12,7 +12,7 @@
 	services.gpg-agent.pinentryFlavor = "gnome3";
 
 	home.packages = with pkgs; with gnomeExtensions; [
-		deja-dup gparted pika-backup # administration
+		gparted pika-backup # administration
 		evolution fractal gnome.polari transmission-gtk # communication
 		gnome.ghex gitg meld # development
 		celluloid gnome.gnome-sound-recorder kooha lollypop pitivi pulseeffects-pw # multimedia
