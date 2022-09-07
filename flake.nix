@@ -59,5 +59,6 @@
 					inherit (hmpkgs) home-manager;
 				};
 			}) home-manager.packages;
+			devShell = mapAttrs (system: shells: shells.default) self.devShells;
 		};
 }
