@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+nix registry add nixpkgs github:NixOS/nixpkgs/nixpkgs-unstable
+nix registry add nixpkgs-unfree github:numtide/nixpkgs-unfree/nixpkgs-unstable
+nix registry pin github:NixOS/nixpkgs/nixpkgs-unstable
+nix registry pin github:numtide/nixpkgs-unfree/nixpkgs-unstable
