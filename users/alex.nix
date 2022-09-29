@@ -126,6 +126,9 @@ in {
 		# more merge conflicts but better markers
 		extraConfig.merge.conflictStyle = "diff3";
 
+		# only fast-forward pulls
+		extraConfig.pull.ff = "only";
+
 		# like "oneline" but with PGP status
 		extraConfig.pretty.l = "%C(auto)%h %Cblue%G?%Creset%C(auto)%d %s";
 
