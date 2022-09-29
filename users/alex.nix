@@ -226,7 +226,7 @@ in {
 	services.syncthing.enable = true;
 
 	home.packages = with pkgs; [
-		gnufdisk gptfdisk inetutils psmisc tcpdump # administration
+		borgbackup gnufdisk gptfdisk inetutils psmisc tcpdump # administration
 		yubikey-manager # communication
 		bench binutils-unwrapped.info binutils-unwrapped.man breezy cvs cvsps fossil gcc-unwrapped.info gcc-unwrapped.man git-annex git-annex-utils hyperfine mercurial radare2 tig # development
 		tealdeer cht-sh # documentation
