@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+nix registry add nixpkgs github:NixOS/nixpkgs/nixpkgs-unstable
+nix registry add nixpkgs-unfree github:numtide/nixpkgs-unfree/nixpkgs-unstable
+nix registry add github:NixOS/nixpkgs/{nixpkgs-unstable,$(jq -r '.nodes["nixpkgs"].locked.rev' < flake.lock)}
+nix registry add github:numtide/nixpkgs-unfree/{nixpkgs-unstable,$(jq -r '.nodes["nixpkgs-unstable"].locked.rev' < flake.lock)}
