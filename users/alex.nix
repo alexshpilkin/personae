@@ -116,7 +116,7 @@ in {
 			pre = "preview";
 			preview = "diff --staged";
 			reb = "rebranch --no-gpg-sign";
-			rebranch = "reset --interactive --reset-author-date";
+			rebranch = "rebase --interactive --reset-author-date";
 			"rec" = "recommit --no-gpg-sign";
 			recommit = "commit --amend --reset-author";
 			rew = "rewrite --no-gpg-sign";
