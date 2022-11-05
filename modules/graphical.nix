@@ -2,7 +2,7 @@
 
 {
 	home.packages = with pkgs; [
-		signal-desktop pkgs-unfree.slack tdesktop pkgs-unfree.zoom-us # communication
+		signal-desktop tdesktop pkgs-unfree.zoom-us # communication
 		gentium gentium-book-basic ibm-plex inconsolata iosevka paratype-pt-sans roboto pkgs-unfree.vistafonts # fonts
 		darktable # multimedia
 		wl-clipboard # scripting
