@@ -78,6 +78,18 @@ in {
 			#	commands = "alias global repl-new tmux-repl-window";
 			#}
 			{
+				name = "WinCreate"; option = ".*";
+				commands = "git show-diff";
+			}
+			{
+				name = "BufReload"; option = ".*";
+				commands = "git update-diff";
+			}
+			{
+				name = "BufWritePost"; option = ".*";
+				commands = "git update-diff";
+			}
+			{
 				name = "WinSetOption"; option = "filetype=latex";
 				commands = "addhl window/ wrap";
 			}
