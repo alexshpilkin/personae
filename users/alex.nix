@@ -148,6 +148,9 @@ in {
 		extraConfig.remote.pushDefault = "origin";
 		extraConfig.push.default = "current";
 
+		# rewrite notes with their commits
+		extraConfig.notes.rewriteRef = "refs/notes/commits";
+
 		# nags
 		extraConfig.advice.detachedHead = false;
 		extraConfig.init.defaultBranch = "master";
