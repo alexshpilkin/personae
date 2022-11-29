@@ -17,7 +17,7 @@
 		gnome.ghex gitg meld # development
 		celluloid easyeffects gnome.gnome-sound-recorder kooha lollypop parlatype pitivi # multimedia
 		gnome.dconf-editor gnome.gnome-shell-extensions gnome.gnome-tweaks # settings
-		hibernate-status-button night-theme-switcher syncthing-indicator # shell
+		hibernate-status-button keep-awake night-theme-switcher syncthing-indicator # shell
 		foliate # text
 	];
 }
