@@ -5,9 +5,10 @@
 	inputs.nix-on-droid.url = "nix-on-droid/master";
 	inputs.nix-on-droid.inputs.home-manager.follows = "home-manager";
 	inputs.nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
-	inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+	# FIXME should also be included in user registry?
+	inputs.nixpkgs.follows = "nixpkgs-unfree/nixpkgs";
+	# FIXME does not lock properly for some reason
 	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
-	inputs.nixpkgs-unfree.inputs.nixpkgs.follows = "nixpkgs";
 
 	outputs = { self, home-manager, nix-on-droid, nixpkgs, nixpkgs-unfree }:
 		let
