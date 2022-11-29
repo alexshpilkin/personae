@@ -2,11 +2,14 @@
 
 {
 	inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+	inputs.nix-on-droid.url = "nix-on-droid/master";
+	inputs.nix-on-droid.inputs.home-manager.follows = "home-manager";
+	inputs.nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
 	inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
 	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
 	inputs.nixpkgs-unfree.inputs.nixpkgs.follows = "nixpkgs";
 
-	outputs = { self, home-manager, nixpkgs, nixpkgs-unfree }:
+	outputs = { self, home-manager, nix-on-droid, nixpkgs, nixpkgs-unfree }:
 		let
 			inherit (builtins) elemAt match pathExists readDir;
 			inherit (home-manager.lib) homeManagerConfiguration;
