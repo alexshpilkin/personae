@@ -124,15 +124,17 @@ in {
 			an = "add --intent-to-add";
 			ap = "add --patch";
 			com = "commit --no-gpg-sign";
+			fix = "com --fixup";
+			fixup = "commit --fixup";
 			l = "log --pretty=l";
 			pre = "preview";
 			preview = "diff --staged";
 			reb = "rebranch --no-gpg-sign";
-			rebranch = "rebase --interactive --reset-author-date";
+			rebranch = "rebase --interactive --autosquash --reset-author-date";
 			"rec" = "recommit --no-gpg-sign";
 			recommit = "commit --amend --reset-author";
 			rew = "rewrite --no-gpg-sign";
-			rewrite = "rebase --interactive --committer-date-is-author-date";
+			rewrite = "rebase --interactive --autosquash --committer-date-is-author-date";
 		};
 
 		# more merge conflicts but better markers
@@ -246,7 +248,7 @@ in {
 	home.packages = with pkgs; [
 		borgbackup gnufdisk gptfdisk inetutils psmisc tcpdump # administration
 		yubikey-manager # communication
-		bench binutils-unwrapped.info binutils-unwrapped.man breezy cvs cvsps fossil gcc-unwrapped.info gcc-unwrapped.man git-annex git-annex-utils hyperfine mercurial radare2 tig # development
+		bench binutils-unwrapped.info binutils-unwrapped.man breezy cvs cvsps fossil gcc-unwrapped.info gcc-unwrapped.man git-absorb git-annex git-annex-utils hyperfine mercurial radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
 		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget youtube-dl # scripting
