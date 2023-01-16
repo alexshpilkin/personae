@@ -251,7 +251,7 @@ in {
 		bench binutils-unwrapped.info binutils-unwrapped.man breezy cvs cvsps fossil gcc-unwrapped.info gcc-unwrapped.man git-absorb git-annex git-annex-utils hyperfine linuxPackages_latest.perf mercurial perf-tools radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
-		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget youtube-dl # scripting
+		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget xmlstarlet youtube-dl # scripting
 		fd nix-index ripgrep ripgrep-all # search
 		colordiff editorconfig-core-c wdiff # text
 	];
