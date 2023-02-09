@@ -99,25 +99,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unfree": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1673706030,
-        "narHash": "sha256-gw/bHLNtsn3L1bpEJjjAyS28VqJanqIvft287DrGIJQ=",
-        "owner": "numtide",
-        "repo": "nixpkgs-unfree",
-        "rev": "05a57c3826dfe90525f0781bd97f43bad35a9c51",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs-unfree",
-        "type": "github"
-      }
-    },
     "nmd": {
       "flake": false,
       "locked": {
@@ -170,11 +151,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nix-on-droid": "nix-on-droid",
-        "nixpkgs": [
-          "nixpkgs-unfree",
-          "nixpkgs"
-        ],
-        "nixpkgs-unfree": "nixpkgs-unfree"
+        "nixpkgs": "nixpkgs"
       }
     },
     "utils": {

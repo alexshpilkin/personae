@@ -5,12 +5,8 @@
 	inputs.nix-on-droid.url = "nix-on-droid/master";
 	inputs.nix-on-droid.inputs.home-manager.follows = "home-manager";
 	inputs.nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
-	# FIXME should also be included in user registry?
-	inputs.nixpkgs.follows = "nixpkgs-unfree/nixpkgs";
-	# FIXME does not lock properly for some reason
-	inputs.nixpkgs-unfree.url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
 
-	outputs = { self, home-manager, nix-on-droid, nixpkgs, nixpkgs-unfree }:
+	outputs = { self, home-manager, nix-on-droid, nixpkgs }:
 		let
 			inherit (builtins) elemAt match pathExists readDir;
 			inherit (home-manager.lib) homeManagerConfiguration;
@@ -33,13 +29,12 @@
 
 			mkUser = name: path:
 				let
-					pkgs-unfree = nixpkgs-unfree.legacyPackages.x86_64-linux; # FIXME
 					username = elemAt (match "([^@]*)(@.*)?" name) 0;
 					userPath = elemAt (match "([^@]*)@.*" (toString path)) 0;
 					userFile = userPath + ".nix";
 				in homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME
-					extraSpecialArgs = self.homeModules // { inherit pkgs-unfree; };
+					extraSpecialArgs = self.homeModules;
 					modules = [
 						{
 							# FIXME system.configurationRevision counterpart?

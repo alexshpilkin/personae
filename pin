@@ -1,3 +1,0 @@
-#!/bin/sh -eu
-nix registry add nixpkgs-unfree github:numtide/nixpkgs-unfree/nixpkgs-unstable
-nix registry pin github:numtide/nixpkgs-unfree/nixpkgs-unstable
