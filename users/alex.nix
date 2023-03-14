@@ -39,10 +39,10 @@ in {
 		enable = true;
 		baseIndex = 1; # number windows and panes from 1
 		escapeTime = 10; # delay for ECMA codes vs ESC key
-		newSession = true; # create session on attach
 		extraConfig = ''
 			set-option -g mouse on
 			# FIXME set-option -s copy-command wl-copy
+			new-session -A -s default
 		'';
 	};
 
