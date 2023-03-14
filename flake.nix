@@ -2,11 +2,13 @@
 
 {
 	inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+	inputs.nix-index-database.url = "github:Mic92/nix-index-database";
+	inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 	inputs.nix-on-droid.url = "nix-on-droid/master";
 	inputs.nix-on-droid.inputs.home-manager.follows = "home-manager";
 	inputs.nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
 
-	outputs = { self, home-manager, nix-on-droid, nixpkgs }:
+	outputs = { self, home-manager, nix-index-database, nix-on-droid, nixpkgs }:
 		let
 			inherit (builtins) elemAt match pathExists readDir;
 			inherit (home-manager.lib) homeManagerConfiguration;
@@ -34,7 +36,7 @@
 					userFile = userPath + ".nix";
 				in homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux; # FIXME
-					extraSpecialArgs = self.homeModules;
+					extraSpecialArgs = nix-index-database.hmModules // self.homeModules;
 					modules = [
 						{
 							# FIXME system.configurationRevision counterpart?

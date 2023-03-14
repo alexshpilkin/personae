@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, nix-index, pkgs, ... }:
 
 let
 	inherit (builtins) replaceStrings;
@@ -6,6 +6,8 @@ let
 	rootConfig = config;
 
 in {
+	imports = [ nix-index ];
+
 	home.extraOutputsToInstall = mkDefault [ "doc" "man" "info" ];
 
 	programs.bash.enable = true;
@@ -252,7 +254,7 @@ in {
 		tealdeer cht-sh # documentation
 		binwalk dos2unix file ffmpeg imagemagick libarchive pdftk unrar-wrapper zip # formats
 		jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget xmlstarlet yt-dlp # scripting
-		fd nix-index ripgrep ripgrep-all # search
+		fd ripgrep ripgrep-all # search
 		colordiff editorconfig-core-c wdiff # text
 	];
 }
