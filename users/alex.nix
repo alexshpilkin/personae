@@ -53,7 +53,7 @@ in {
 		tmux.enableShellIntegration = true;
 	};
 
-	home.sessionVariables.EDITOR = "kak";
+	home.sessionVariables.EDITOR = "${config.programs.kakoune.package}/bin/kak";
 	programs.kakoune = {
 		enable = true;
 		config.indentWidth = 0; # tabs FTW
