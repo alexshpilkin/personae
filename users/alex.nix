@@ -92,6 +92,10 @@ in {
 				commands = "git update-diff";
 			}
 			{
+				name = "WinSetOption"; option = "filetype=c";
+				commands = "lsp-enable-window";
+			}
+			{
 				name = "WinSetOption"; option = "filetype=latex";
 				commands = "addhl window/ wrap";
 			}
@@ -102,13 +106,29 @@ in {
 		];
 		config.keyMappings = [
 			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
+			{ key = "l"; mode = "user"; docstring = "lsp";
+			  effect = ":enter-user-mode lsp<ret>"; }
+			{ key = "a"; mode = "object"; docstring = "symbol";
+			  effect = "<a-;>lsp-object<ret>"; }
+			{ key = "e"; mode = "object"; docstring = "function or method";
+			  effect = "<a-;>lsp-object Function Method<ret>"; }
+			{ key = "k"; mode = "object"; docstring = "class or interface";
+			  effect = "<a-;>lsp-object Class Interface Struct<ret>"; }
+			{ key = "d"; mode = "object"; docstring = "error or warning";
+			  effect = "<a-;>lsp-diagnostic-object --include-warnings<ret>"; }
+			{ key = "D"; mode = "object"; docstring = "error";
+			  effect = "<a-;>lsp-diagnostic-object<ret>"; }
 		];
-		plugins = with pkgs.kakounePlugins; [ fzf-kak kakoune-rainbow ];
+		plugins = with pkgs.kakounePlugins; [ fzf-kak kak-lsp kakoune-rainbow ];
 		extraConfig = ''
 			define-command write-delete-buffer %{ write; delete-buffer }
 			alias global wdb write-delete-buffer
 
 			define-command tig %{ terminal tig --all }
+
+			eval %sh{ ${pkgs.kakounePlugins.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session }
+			lsp-stop-on-exit-enable
+			lsp-inlay-diagnostics-enable global
 		'';
 	};
 
