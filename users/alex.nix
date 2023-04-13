@@ -143,6 +143,7 @@ in {
 		aliases = {
 			abt = "rebase --abort";
 			con = "rebase --continue";
+			cp = "checkout --patch";
 			an = "add --intent-to-add";
 			ap = "add --patch";
 			com = "commit --no-gpg-sign";
@@ -157,6 +158,7 @@ in {
 			recommit = "commit --amend --reset-author";
 			rew = "rewrite --no-gpg-sign";
 			rewrite = "rebase --interactive --autosquash --committer-date-is-author-date";
+			rp = "reset --patch";
 		};
 
 		# more merge conflicts but better markers
