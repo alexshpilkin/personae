@@ -108,6 +108,9 @@ in {
 			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
 			{ key = "l"; mode = "user"; docstring = "lsp";
 			  effect = ":enter-user-mode lsp<ret>"; }
+			{ key = "<tab>"; mode = "insert"; docstring = "select next placeholder";
+			  effect = "<a-;>:try lsp-snippets-select-next-placeholders catch " +
+			           "%{ execute-keys -with-hooks <lt>tab> }<ret>"; }
 			{ key = "a"; mode = "object"; docstring = "symbol";
 			  effect = "<a-;>lsp-object<ret>"; }
 			{ key = "e"; mode = "object"; docstring = "function or method";
