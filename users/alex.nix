@@ -5,6 +5,22 @@ let
 	inherit (lib) mkDefault;
 	rootConfig = config;
 
+	kakoune-gdb = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
+		pname = "kakoune-gdb";
+		version = "2023-03-02";
+		propagatedBuildInputs = with pkgs; [ perl socat ];
+		src = pkgs.fetchFromGitHub {
+			owner = "occivink";
+			repo = "kakoune-gdb";
+			rev = "2cbf73ac9b2f13cf20417efe5ce27aab08bc7beb";
+			sha256 = "0y3s7sz53rpbnx2wr0hajz3v9ykjqx1rg72zxwcn6rwsa4spfksa";
+		};
+		meta = {
+			description = "gdb integration plugin";
+			homepage = "https://github.com/occivink/kakoune-gdb";
+		};
+	};
+
 in {
 	imports = [ nix-index ];
 
@@ -106,6 +122,18 @@ in {
 		];
 		config.keyMappings = [
 			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
+			{ key = "<c-l>"; mode = "normal"; docstring = "toggle breakpoint";
+				effect = ":gdb-toggle-breakpoint<ret>"; }
+			{ key = "<c-semicolon>"; mode = "normal"; docstring = "step into";
+				effect = ":gdb-step<ret>"; }
+			{ key = "<c-:>"; mode = "normal"; docstring = "step out";
+				effect = ":gdb-finish<ret>"; }
+			{ key = "<c-'>"; mode = "normal"; docstring = "step over";
+				effect = ":gdb-next<ret>"; }
+			{ key = "<c-backspace>"; mode = "normal"; docstring = "continue";
+				effect = ":gdb-continue<ret>"; }
+			{ key = "<c-|>"; mode = "normal"; docstring = "start";
+				effect = ":gdb-start<ret>"; }
 			{ key = "l"; mode = "user"; docstring = "lsp";
 			  effect = ":enter-user-mode lsp<ret>"; }
 			{ key = "<tab>"; mode = "insert"; docstring = "select next placeholder";
@@ -122,7 +150,9 @@ in {
 			{ key = "D"; mode = "object"; docstring = "error";
 			  effect = "<a-;>lsp-diagnostic-object<ret>"; }
 		];
-		plugins = with pkgs.kakounePlugins; [ fzf-kak kak-lsp kakoune-rainbow ];
+		plugins = with pkgs.kakounePlugins; [
+			fzf-kak kak-lsp kakoune-gdb kakoune-rainbow
+		];
 		extraConfig = ''
 			define-command write-delete-buffer %{ write; delete-buffer }
 			alias global wdb write-delete-buffer
