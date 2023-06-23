@@ -8,13 +8,20 @@ let
 	kakoune-gdb = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
 		pname = "kakoune-gdb";
 		version = "2023-03-02";
-		propagatedBuildInputs = with pkgs; [ perl socat ];
+		buildInputs = with pkgs; [ perl socat ];
 		src = pkgs.fetchFromGitHub {
 			owner = "occivink";
 			repo = "kakoune-gdb";
 			rev = "2cbf73ac9b2f13cf20417efe5ce27aab08bc7beb";
 			sha256 = "0y3s7sz53rpbnx2wr0hajz3v9ykjqx1rg72zxwcn6rwsa4spfksa";
 		};
+		patchPhase = ''
+			runHook prePatch
+			substituteInPlace gdb.kak \
+				--replace ' perl ' ' ${pkgs.perl}/bin/perl ' \
+				--replace ' socat ' ' ${pkgs.socat}/bin/socat '
+			runHook postPatch
+		'';
 		meta = {
 			description = "gdb integration plugin";
 			homepage = "https://github.com/occivink/kakoune-gdb";
