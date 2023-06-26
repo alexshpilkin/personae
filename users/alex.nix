@@ -1,7 +1,7 @@
 { config, lib, nix-index, pkgs, ... }:
 
 let
-	inherit (builtins) replaceStrings;
+	inherit (builtins) concatStringsSep replaceStrings;
 	inherit (lib) mkDefault;
 	rootConfig = config;
 
@@ -50,6 +50,12 @@ in {
 		PS3=$color''$reset
 		PS4=$color'+ '$reset
 	'';
+
+	systemd.user.sessionVariables._JAVA_OPTIONS = concatStringsSep " " [
+		"-Dgradle.user.home=\${XDG_CACHE_HOME:-$HOME/.cache}/gradle"
+		"-Djava.util.prefs.userRoot=\${XDG_CONFIG_HOME:-$HOME/.config}/java"
+		"-Dmaven.repo.local=\${XDG_CACHE_HOME:-$HOME/.cache}/m2"
+	];
 
 	systemd.user.sessionVariables.SSH_AUTH_SOCK =
 		let
