@@ -135,6 +135,10 @@ in {
 		];
 		config.keyMappings = [
 			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
+			{ key = "u"; mode = "goto"; docstring = "next hunk";
+				effect = "<esc>:git next-hunk<ret>"; }
+			{ key = "i"; mode = "goto"; docstring = "previous hunk";
+				effect = "<esc>:git prev-hunk<ret>"; }
 			{ key = "<c-l>"; mode = "normal"; docstring = "toggle breakpoint";
 				effect = ":gdb-toggle-breakpoint<ret>"; }
 			{ key = "<c-semicolon>"; mode = "normal"; docstring = "step into";
