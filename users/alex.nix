@@ -265,18 +265,7 @@ in {
 	services.gpg-agent.enable = true;
 	services.gpg-agent.enableSshSupport = true;
 
-	programs.lieer = {
-		enable = true;
-		# local_trash_tag support is post 1.3
-		package = pkgs.lieer.overrideAttrs (old: {
-			src = pkgs.fetchFromGitHub {
-				owner = "gauteh";
-				repo = "lieer";
-				rev = "11c792fbf416aedb0466f64973e29e1f4aed4916"; # master 2022-06-29
-				sha256 = "0fw9vjcr2l9qkiilzibq0h88jfmlpgm6zzra9klpkyg8l3n3mcgw";
-			};
-		});
-	};
+	programs.lieer.enable = true;
 	programs.notmuch = {
 		enable = true;
 		new.tags = [ "new" ];
