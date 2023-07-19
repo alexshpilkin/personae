@@ -193,12 +193,12 @@ in {
 		aliases = {
 			abt = "rebase --abort";
 			con = "rebase --continue";
-			cp = "checkout --patch";
 			an = "add --intent-to-add";
 			ap = "add --patch";
 			com = "commit --no-gpg-sign";
 			fix = "com --fixup";
 			fixup = "commit --fixup";
+			kp = "checkout --patch";
 			l = "log --pretty=l";
 			pre = "preview";
 			preview = "diff --staged";
