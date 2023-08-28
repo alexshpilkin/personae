@@ -315,7 +315,7 @@ in {
 		tealdeer cht-sh # documentation
 		binwalk dos2unix exiftool file ffmpeg imagemagick libarchive pdftk unar unrar-wrapper zip # formats
 		expect ix jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget xmlstarlet yt-dlp # scripting
-		fd ripgrep ripgrep-all # search
+		fd ripgrep #ripgrep-all # search
 		colordiff editorconfig-core-c wdiff # text
 	];
 }
