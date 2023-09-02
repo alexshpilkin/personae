@@ -62,7 +62,7 @@ in {
 			unit = config.systemd.user.sockets.gpg-agent-ssh;
 			socket = unit.Socket.ListenStream;
 			expand = replaceStrings [ "%t" ] [ "\${XDG_RUNTIME_DIR}" ];
-		in "\${SSH_AUTH_SOCK:-${expand socket}}";
+		in expand socket;
 
 	programs.direnv.enable = true;
 
