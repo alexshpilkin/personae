@@ -16,7 +16,7 @@
 		evolution fractal gnome.polari transmission-gtk # communication
 		gnome.ghex gitg meld # development
 		celluloid easyeffects gnome.gnome-sound-recorder kooha lollypop parlatype pitivi # multimedia
-		gnome.dconf-editor gnome.gnome-shell-extensions gnome.gnome-tweaks # settings
+		gnome.dconf-editor gnome.gnome-shell-extensions gnome.gnome-tweaks helvum # settings
 		hibernate-status-button keep-awake night-theme-switcher syncthing-indicator weather # shell
 		foliate # text
 	];
