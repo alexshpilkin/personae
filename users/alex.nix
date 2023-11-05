@@ -49,6 +49,9 @@ in {
 		PS2=$color'> '$reset
 		PS3=$color''$reset
 		PS4=$color'+ '$reset
+		if tput hs; then
+			PS1='\['`tput tsl`'\u@\h:\w'`tput fsl`'\]'$PS1
+		fi
 	'';
 
 	systemd.user.sessionVariables._JAVA_OPTIONS = concatStringsSep " " [
@@ -71,7 +74,10 @@ in {
 		baseIndex = 1; # number windows and panes from 1
 		escapeTime = 10; # delay for ECMA codes vs ESC key
 		extraConfig = ''
+			set-option -gu default-terminal # HM defaults to "screen"
 			set-option -g mouse on
+			set-option -g set-titles on
+			set-option -g set-titles-string "#S:#I.#P: #T"
 			# FIXME set-option -s copy-command wl-copy
 			new-session -A -s default
 		'';
