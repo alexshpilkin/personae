@@ -1,0 +1,2 @@
+#!/bin/sh -eu
+nix registry remove github:NixOS/nixpkgs/nixos-unstable
