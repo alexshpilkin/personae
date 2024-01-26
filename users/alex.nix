@@ -67,7 +67,10 @@ in {
 			expand = replaceStrings [ "%t" ] [ "\${XDG_RUNTIME_DIR}" ];
 		in expand socket;
 
-	programs.direnv.enable = true;
+	programs.direnv = {
+		enable = true;
+		nix-direnv.enable = true;
+	};
 
 	programs.tmux = {
 		enable = true;
@@ -88,6 +91,11 @@ in {
 		tmux.enableShellIntegration = true;
 		defaultCommand = "${pkgs.fd}/bin/fd --follow --strip-cwd-prefix --type file --type symlink";
 		fileWidgetCommand = config.programs.fzf.defaultCommand;
+	};
+
+	programs.ripgrep = {
+		enable = true;
+		arguments = [ "--smart-case" ];
 	};
 
 	home.sessionVariables.EDITOR = "${config.programs.kakoune.package}/bin/kak";
@@ -325,7 +333,7 @@ in {
 		tealdeer cht-sh # documentation
 		binwalk dos2unix exiftool file ffmpeg imagemagick libarchive pdftk unar unrar-wrapper zip # formats
 		expect jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget xmlstarlet yt-dlp # scripting
-		fd ripgrep #ripgrep-all # search
+		fd #ripgrep-all # search
 		colordiff editorconfig-core-c wdiff # text
 	];
 }
