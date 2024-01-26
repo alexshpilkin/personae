@@ -86,6 +86,8 @@ in {
 	programs.fzf = {
 		enable = true;
 		tmux.enableShellIntegration = true;
+		defaultCommand = "${pkgs.fd}/bin/fd --follow --strip-cwd-prefix --type file --type symlink";
+		fileWidgetCommand = config.programs.fzf.defaultCommand;
 	};
 
 	home.sessionVariables.EDITOR = "${config.programs.kakoune.package}/bin/kak";
@@ -140,7 +142,7 @@ in {
 			}
 		];
 		config.keyMappings = [
-			{ key = "<c-p>"; mode = "normal"; effect = ":fzf-mode<ret>"; }
+			{ key = "<c-t>"; mode = "normal"; effect = ":fzf-mode<ret>f"; }
 			{ key = "u"; mode = "goto"; docstring = "next hunk";
 				effect = "<esc>:git next-hunk<ret>"; }
 			{ key = "i"; mode = "goto"; docstring = "previous hunk";
@@ -157,6 +159,8 @@ in {
 				effect = ":gdb-continue<ret>"; }
 			{ key = "<c-|>"; mode = "normal"; docstring = "start";
 				effect = ":gdb-start<ret>"; }
+			{ key = "f"; mode = "user"; docstring = "fzf";
+				effect = ":fzf-mode<ret>"; }
 			{ key = "l"; mode = "user"; docstring = "lsp";
 			  effect = ":enter-user-mode lsp<ret>"; }
 			{ key = "<tab>"; mode = "insert"; docstring = "select next placeholder";
