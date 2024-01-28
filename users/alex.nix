@@ -28,6 +28,15 @@ let
 		};
 	};
 
+	fzf-kak = pkgs.kakounePlugins.fzf-kak.overrideAttrs (final: prev: {
+		postPatch = prev.postPatch or "" + ''
+			substituteInPlace rc/modules/fzf-file.kak \
+				--replace '(find*|ag*|rg*|fd*)' '(find*|*/find*|ag*|*/ag*|rg*|*/rg*|fd*|*/fd*)'
+			substituteInPlace rc/modules/fzf-grep.kak \
+				--replace '(grep*|rg*)' '(grep|*/grep*|rg*|*/rg*)'
+		'';
+	});
+
 in {
 	imports = [ nix-index ];
 
@@ -89,8 +98,7 @@ in {
 	programs.fzf = {
 		enable = true;
 		tmux.enableShellIntegration = true;
-		defaultCommand = "${pkgs.fd}/bin/fd --follow --strip-cwd-prefix --type file --type symlink";
-		fileWidgetCommand = config.programs.fzf.defaultCommand;
+		fileWidgetCommand = "${pkgs.fd}/bin/fd --follow --strip-cwd-prefix --type file --type symlink";
 	};
 
 	programs.ripgrep = {
@@ -193,6 +201,10 @@ in {
 			alias global wdb write-delete-buffer
 
 			define-command tig %{ terminal tig --all }
+
+			hook global ModuleLoaded fzf-file %{
+				set-option global fzf_file_command '${config.programs.fzf.fileWidgetCommand}'
+			}
 
 			eval %sh{ ${pkgs.kakounePlugins.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session }
 			lsp-stop-on-exit-enable
