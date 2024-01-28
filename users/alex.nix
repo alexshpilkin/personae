@@ -107,6 +107,8 @@ in {
 	};
 
 	home.sessionVariables.EDITOR = "${config.programs.kakoune.package}/bin/kak";
+	systemd.user.sessionVariables.EDITOR = mkDefault config.home.sessionVariables.EDITOR;
+
 	programs.kakoune = {
 		enable = true;
 		config.indentWidth = 0; # tabs FTW
