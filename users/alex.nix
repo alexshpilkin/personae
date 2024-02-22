@@ -106,11 +106,11 @@ in {
 		arguments = [ "--smart-case" ];
 	};
 
-	home.sessionVariables.EDITOR = "${config.programs.kakoune.package}/bin/kak";
 	systemd.user.sessionVariables.EDITOR = mkDefault config.home.sessionVariables.EDITOR;
 
 	programs.kakoune = {
 		enable = true;
+		defaultEditor = true;
 		config.indentWidth = 0; # tabs FTW
 		config.showMatching = true; # highlight matching delimiter
 		config.ui.assistant = "none"; # disable clippy
