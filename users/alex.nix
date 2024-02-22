@@ -243,8 +243,19 @@ in {
 			rp = "reset --patch";
 		};
 
+		# better diffs
+		extraConfig.diff.algorithm = "histogram";
+		extraConfig.diff.submodule = "log";
+		extraConfig.status.submoduleSummary = true;
+
 		# more merge conflicts but better markers
-		extraConfig.merge.conflictStyle = "diff3";
+		extraConfig.merge.conflictStyle = "zdiff3";
+
+		# reuse merge conflict resolutions
+		extraConfig.rerere.enabled = true;
+
+		# recursive pulls and so on by default
+		extraConfig.submodule.recurse = true;
 
 		# only fast-forward pulls
 		extraConfig.pull.ff = "only";
@@ -255,6 +266,11 @@ in {
 		# triangular workflow setup
 		extraConfig.remote.pushDefault = "origin";
 		extraConfig.push.default = "current";
+
+		# github pushes
+		extraConfig.url."git@github.com:" = {
+			pushInsteadOf = "https://github.com/";
+		};
 
 		# rewrite notes with their commits
 		extraConfig.notes.rewriteRef = "refs/notes/commits";
