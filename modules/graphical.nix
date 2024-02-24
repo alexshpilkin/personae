@@ -8,4 +8,8 @@
 		wl-clipboard # scripting
 		kiwix libreoffice # text
 	];
+
+	programs.tmux.extraConfig = ''
+		set-option -s copy-command wl-copy
+	'';
 }

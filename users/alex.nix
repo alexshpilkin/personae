@@ -90,7 +90,6 @@ in {
 			set-option -g mouse on
 			set-option -g set-titles on
 			set-option -g set-titles-string "#S:#I.#P: #T"
-			# FIXME set-option -s copy-command wl-copy
 			new-session -A -s default
 		'';
 	};
@@ -134,6 +133,14 @@ in {
 			#	name = "ModuleLoaded"; option = "tmux-repl";
 			#	commands = "alias global repl-new tmux-repl-window";
 			#}
+			{
+				name = "ModuleLoaded"; option = "tmux";
+				commands = ''
+					hook global RegisterModified '"' %{
+						nop %sh{ tmux set-buffer "$kak_main_reg_dquote" }
+					}
+				'';
+			}
 			{
 				name = "WinCreate"; option = ".*";
 				commands = "git show-diff";
