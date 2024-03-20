@@ -9,7 +9,7 @@
 
 	services.gnome-keyring.enable = true;
 
-	services.gpg-agent.pinentryFlavor = "gnome3";
+	services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
 
 	home.packages = with pkgs; with gnomeExtensions; [
 		gparted pika-backup # administration
