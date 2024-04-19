@@ -203,7 +203,7 @@ in {
 			  effect = "<a-;>lsp-diagnostic-object<ret>"; }
 		];
 		plugins = with pkgs.kakounePlugins; [
-			fzf-kak kak-lsp kakoune-gdb kakoune-rainbow
+			fzf-kak kakoune-lsp kakoune-gdb kakoune-rainbow
 		];
 		extraConfig = ''
 			define-command write-delete-buffer %{ write; delete-buffer }
@@ -215,7 +215,7 @@ in {
 				set-option global fzf_file_command '${config.programs.fzf.fileWidgetCommand}'
 			}
 
-			eval %sh{ ${pkgs.kakounePlugins.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session }
+			eval %sh{ ${pkgs.kakounePlugins.kakoune-lsp}/bin/kak-lsp --kakoune -s $kak_session }
 			lsp-stop-on-exit-enable
 			lsp-inlay-diagnostics-enable global
 		'';
