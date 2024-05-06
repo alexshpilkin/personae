@@ -110,6 +110,14 @@ in {
 	programs.kakoune = {
 		enable = true;
 		defaultEditor = true;
+		package = pkgs.kakoune-unwrapped.overrideAttrs (old: {
+			version = "2024.04.22";
+			src = old.src.override {
+				rev = "5d2b8351a69de5e3c56323bacf8a564da7ad7f44";
+				sha256 = "0g7s3skwam55z2avymb90vkz0rsrk95pqmmr1n1kfpcv631p1zj3";
+			};
+			patches = [];
+		});
 		config.indentWidth = 0; # tabs FTW
 		config.showMatching = true; # highlight matching delimiter
 		config.ui.assistant = "none"; # disable clippy
