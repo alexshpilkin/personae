@@ -7,13 +7,13 @@ let
 
 	kakoune-gdb = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
 		pname = "kakoune-gdb";
-		version = "2023-03-02";
+		version = "2024-01-08";
 		buildInputs = with pkgs; [ perl socat ];
 		src = pkgs.fetchFromGitHub {
 			owner = "occivink";
 			repo = "kakoune-gdb";
-			rev = "2cbf73ac9b2f13cf20417efe5ce27aab08bc7beb";
-			sha256 = "0y3s7sz53rpbnx2wr0hajz3v9ykjqx1rg72zxwcn6rwsa4spfksa";
+			rev = "e4264aa1ba133f6e7188a6e55c2b47ffb40180b6";
+			sha256 = "0w4wgi0bn72f8gq5pyjnsc4mi8pix8yid7pd3mx4lr3fz57mcv1h";
 		};
 		patchPhase = ''
 			runHook prePatch
@@ -110,14 +110,6 @@ in {
 	programs.kakoune = {
 		enable = true;
 		defaultEditor = true;
-		package = pkgs.kakoune-unwrapped.overrideAttrs (old: {
-			version = "2024.04.22";
-			src = old.src.override {
-				rev = "5d2b8351a69de5e3c56323bacf8a564da7ad7f44";
-				sha256 = "0g7s3skwam55z2avymb90vkz0rsrk95pqmmr1n1kfpcv631p1zj3";
-			};
-			patches = [];
-		});
 		config.indentWidth = 0; # tabs FTW
 		config.showMatching = true; # highlight matching delimiter
 		config.ui.assistant = "none"; # disable clippy

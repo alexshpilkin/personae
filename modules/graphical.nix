@@ -6,8 +6,7 @@
 		gentium gentium-book-basic ibm-plex inconsolata iosevka monaspace mplus-outline-fonts.githubRelease paratype-pt-sans roboto # fonts
 		darktable # multimedia
 		wl-clipboard # scripting
-		# FIXME kiwix
-		libreoffice # text
+		kiwix libreoffice # text
 	];
 
 	programs.tmux.extraConfig = ''
