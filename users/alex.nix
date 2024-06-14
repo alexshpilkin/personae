@@ -366,7 +366,7 @@ in {
 	home.packages = with pkgs; [
 		borgbackup gnufdisk gptfdisk iftop inetutils psmisc tcpdump # administration
 		yubikey-manager # communication
-		azure-cli bench binutils-unwrapped.info binutils-unwrapped.man blobfuse breezy cvs cvsps fossil gcc-unwrapped.info gcc-unwrapped.man git-absorb git-annex git-annex-utils git-extras git-review hyperfine loc mercurial perf-tools radare2 tig # development
+		azure-cli bench binutils-unwrapped.info binutils-unwrapped.man blobfuse breezy cvs cvsps flamegraph fossil gcc-unwrapped.info gcc-unwrapped.man git-absorb git-annex git-annex-utils git-extras git-review hyperfine loc mercurial perf-tools radare2 tig # development
 		tealdeer cht-sh # documentation
 		binwalk dos2unix exiftool file ffmpeg imagemagick libarchive pdftk unar unrar-wrapper zip # formats
 		expect jq httpie maxima moreutils octave pup pv rlwrap simple-http-server wget xmlstarlet yt-dlp # scripting
