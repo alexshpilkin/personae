@@ -218,6 +218,8 @@ in {
 			eval %sh{ ${pkgs.kakounePlugins.kakoune-lsp}/bin/kak-lsp --kakoune -s $kak_session }
 			lsp-stop-on-exit-enable
 			lsp-inlay-diagnostics-enable global
+
+			add-highlighter global/margin column %opt{autowrap_column} default,rgb:404040
 		'';
 	};
 
