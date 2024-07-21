@@ -13,10 +13,10 @@
 
 	home.packages = with pkgs; with gnomeExtensions; [
 		gparted pika-backup # administration
-		evolution fractal gnome.polari transmission-gtk # communication
-		gnome.ghex gitg meld # development
+		evolution fractal gnome.polari transmission_4-gtk # communication
+		ghex gitg meld # development
 		amberol celluloid easyeffects gnome.gnome-sound-recorder kooha parlatype pitivi # multimedia
-		gnome.dconf-editor gnome.gnome-shell-extensions gnome.gnome-tweaks helvum # settings
+		dconf-editor gnome.gnome-shell-extensions gnome-tweaks helvum # settings
 		hibernate-status-button keep-awake night-theme-switcher syncthing-indicator weather # shell
 		foliate # text
 	];
